@@ -11,9 +11,9 @@ interface SelectionBoxProps {
     onResizeHandlePointerDown: (corner: Side, initialBounds: XYWH) => void;
 }
 
-export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
+export const SelectionBox = memo(({
     onResizeHandlePointerDown
-}) => {
+}: SelectionBoxProps) => {
     const soleLayerId = useSelf((me) =>
         me.presence.selection.length === 1 ? me.presence.selection[0] : null
     )
@@ -51,13 +51,14 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                             width: `${HANDLE_WIDTH}px`,
                             height: `${HANDLE_WIDTH}px`,
                             transform: `
-                                translate(${bounds.x - HANDLE_WIDTH / 2}px,
-                                ${bounds.y - HANDLE_WIDTH / 2}px
-                            )`
+                                translate(
+                                    ${bounds.x - HANDLE_WIDTH / 2}px,
+                                    ${bounds.y - HANDLE_WIDTH / 2}px
+                                )`
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Top + Side.Left, bounds)
                         }}
                     />
                     <rect
@@ -76,7 +77,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-                            
+                            onResizeHandlePointerDown(Side.Top, bounds)
                         }}
                     />
                     <rect
@@ -95,7 +96,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Top + Side.Right, bounds)
                         }}
                     />
                     <rect
@@ -114,7 +115,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Right, bounds)
                         }}
                     />
                     <rect
@@ -133,7 +134,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Bottom + Side.Right, bounds)
                         }}
                     />
                     <rect
@@ -152,7 +153,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Bottom, bounds)
                         }}
                     />
                     <rect
@@ -171,7 +172,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Left + Side.Bottom, bounds)
                         }}
                     />
                     <rect
@@ -190,7 +191,7 @@ export const SelectionBox: React.FC<SelectionBoxProps> = memo(({
                         }}
                         onPointerDown={(e) => {
                             e.stopPropagation();
-
+                            onResizeHandlePointerDown(Side.Left, bounds)
                         }}
                     />
                 </>

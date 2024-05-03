@@ -1,6 +1,5 @@
 import { ColorToCss } from "@/lib/utils";
 import { RectangleLayer } from "@/types/canvas";
-import { transform } from "next/dist/build/swc";
 
 interface RectangleProps {
     id: string;
@@ -16,7 +15,7 @@ export const Rectangle: React.FC<RectangleProps> = ({
     selectionColor,
 }) => {
     const { x, y, width, height, fill } = layer;
-
+    
     return (
         <rect
             className="drop-shadow-md"
